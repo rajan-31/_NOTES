@@ -1,3 +1,5 @@
 *.sublime-workspace
 *.code-workspace
+*.class
+*.out
 sync.cmd

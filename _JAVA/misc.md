@@ -1,0 +1,4 @@
+- use ArrayDequeue over LinkedList
+- boolean can only have value "true" or "false" and not 1 or 0, like c++
+- The character must be surrounded by single quotes
+- Java Strings are immutable
