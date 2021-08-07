@@ -12,21 +12,26 @@ Props:
 - non synchronized
 - manipulation is little bit slower than the LinkedList, because a lot of shifting needs to occur if any element is removed from the array list
 
+_IMP functions_
+
 ```java
+
 ArrayList<String> list=new ArrayList<String>();
-// list.size();
-// list.isEmpty();
 
 list.add("A");
 list.add(0, "B");
+list.set(0, "C");
 
 list.get(0);
-list.set(0, "C");
+
+// list.size();		// int
+// list.isEmpty();	// boolean
 
 list.remove("C");
 list.remove(0);
-// list.removeRange(fromIndex, toIndex);
-// list.clear();	// Removes all of the elements
+
+list.removeRange(fromIndex, toIndex);
+list.clear();	// Removes all
 
 // list.indexOf("A");	// first occurrence of the specified element in this list, or -1
 // list.lastIndexOf("A")	// last occurrence of the specified element in this list, or -1
@@ -53,17 +58,21 @@ for(String elt: list) {
 list.forEach(a->{ //Here, we are using lambda expression  
 	System.out.println(a);  
 });
+
 ```
 
-| Method | Description |
-|---	 |---		   |
-| `add(E e)` | Appends the specified element to the end of this list.|
-| `add(int index, E element)` | Inserts the specified element at the specified position in this list.|
+_More functions_
+```java
 
+list.clone()	// Returns a shallow copy of this ArrayList instance
+
+
+```
 
 ---
 
 __LinkedList__
 
 Props:
+
 - 
