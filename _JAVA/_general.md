@@ -1,3 +1,13 @@
+# Creating Format Strings
+	
+```java
+System.out.printf("go %f %d %s", floatVar, intVar, stringVar);	// PrintStream 
+
+String fs;
+fs = String.format("go %f %d %s", floatVar, intVar, stringVar);	// String
+```
+
+
 # Primitive Data Types 
 
 It means predefined (already defined) in Java.
@@ -45,3 +55,21 @@ It means created by the programmer and is not defined by Java (except for String
 - A primitive type has always a value, while non-primitive types can be null.
 - A primitive type starts with a lowercase letter, while non-primitive types starts with an uppercase letter.
 - The size of a primitive type depends on the data type, while non-primitive types have all the same size.
+
+# Type Casting
+
+
+- Widening Casting (automatically) - converting a smaller type to a larger type size
+	byte -> short -> char -> int -> long -> float -> double
+
+	```java
+	int myInt = 9;
+    double myDouble = myInt; // Automatic casting: int to double
+	```
+
+- Narrowing Casting (manually) - converting a larger type to a smaller size type
+	double -> float -> long -> int -> char -> short -> byte
+	```java
+	double myDouble = 9.78d;
+    int myInt = (int) myDouble; // Manual casting: double to int
+	```

@@ -327,43 +327,123 @@ stk.empty(); //returns true iff stack doesn't contain any element, false otherwi
 stk.size(); //number of elements in the stack
 ```
 
----
-
 # Array
 
-```
+```java
 String[] arr = new String[5];
 String[] arr = {"a","b","c", "d", "e"};
 String[] arr = new String[]{"a","b","c","d","e"};
-int[][] arr=new int[3][3];//3 row and 3 column  
 
 // arr.length
 
+int newArr[] = arr.clone();   // deep copy
+
+// Arrays.binarySearch(arr, 3)	// returns index
+// Arrays.equals(arr, arr2)		// boolean
+// Arrays.fill(arr, 0);			// inplace
+// Arrays.fill(arr, fromIndex, toIndex, 0);
+// Arrays.sort(arr);			// inplace
+// Arrays.toString(arr);
+
+int[] newNrr = Arrays.copyOfRange(arr, fromIndex, toIndex);
+
+/* Multidimensional Array */
+int[][] myNumbers = { {1, 2, 3, 4}, {5, 6, 7} };
+int[][] arr = new int[3][3];	//3 row and 3 column
+```
+
+_Other functions_
+
+```java
+/* Print Array without trversing*/
+int[] intArray = { 1, 2, 3, 4, 5 };
+String intArrayString = Arrays.toString(intArray);
+
+System.out.println(intArrayString);		// [1, 2, 3, 4, 5]
+
+/* ArrayList to Array */
 String[] arr = new String[arrayList.size()];
 arrayList.toArray(newArr);
-int newArr[]=arr.clone();   // deep copy
-
-ArrayUtils.reverse(arr);
 ```
 
 # String
 
-```
+```java
 String s1="Welcome";  
 String s2="Welcome";//It doesn't create a new instance  
 String s=new String("Welcome");
 
-char charAt(int index) 	//returns char value for the particular index
-int length()	//returns string length
-String substring(int beginIndex)	// returns substring for given begin index.
-boolean contains(CharSequence s)	//returns true or false after matching the sequence of char value.
-static String join(CharSequence delimiter, CharSequence... elements)	//returns a joined string.
-boolean equals(Object another)	//checks the equality of string with the given object.
-boolean isEmpty()	//checks if string is empty.
-String concat(String str)	//concatenates the specified string.
-String replace(CharSequence old, CharSequence new)	//replaces all occurrences of the specified CharSequence.
-int indexOf(int ch)	//returns the specified char value index.
-int indexOf(String substring)	returns the specified substring index.
-String toLowerCase()
-String toUpperCase()
-String trim()	//removes beginning and ending spaces of this string.
+char[] helloArray = { 'h', 'e', 'l', 'l', 'o', '.' };
+String helloString = new String(helloArray);
+
+String s3 = Integer.toString(i); 
+
+// s.charAt(2);
+// s.length();
+
+s.toLowerCase();
+s.toUpperCase();
+s.trim();	//removes beginning and ending spaces of this string
+
+// s.substring(3)	// returns substring for given begin index.
+// s.indexOf("co");	// or indexOf(String str, int fromIndex)
+// s.indexOf(101);	// 101 = ASCII value of 'e' 
+					// or (int ch, int fromIndex)
+// s.lastIndexOf()	// same ans above two methods
+
+// s.isEmpty();		// boolean
+
+// s.equals(s2)		// boolean
+// s.contains("com");	// boolean
+
+// s.concat(s2)		// String view	// if s is null, NullPointerException
+					// s2 must be a String
+s = s + s2;	//	if s is null, works
+			// it silently converts arg to String (using DataType.toString(val))
+// s.replace("el", "xx");	// String view	// all occurences
+
+
+String.join("xxx", "aaa", "bbb", ...)	// "aaaxxxbbb"	// String view
+
+// s.startsWith("more");	// boolean 	// (String prefix, int toffset)
+// s.endsWith("more");	// boolean
+
+// s.toCharArray();
+// s.getChars(0, s.length(), temp, 0); 	// Copies characters from a string to an array of chars
+										// (int srcBegin, int srcEnd, char[] dst, int dstBegin)
+// s.compareTo(s2) 	// 0 if equal // Compares two strings lexicographically
+					// < 0, lexicographically less than the other string
+					// > 0, lexicographically greater than the other string
+// s.compareToIgnoreCase(s2) 	// Compares two strings lexicographically, ignoring case differences
+```
+
+# Math
+
+```java
+Math.abs(-4.7);
+```
+
+| Method 		| Description 												 | Return Type
+|---			|---														 |---
+| abs(x) 		| absolute value of x 										 | double/float/int/long
+| sqrt(x) 		| square root of x 											 | double
+| cbrt(x) 		| cube root of x 											 | double
+| pow(x, y) 	| value of x to the power of y 								 | double
+| floor(x) 		| value of x rounded down to its nearest integer 			 | double
+| ceil(x) 		| value of x rounded up to its nearest integer 				 | double
+| round(x) 		| value of x rounded to its nearest integer 				 | int
+| hypot(x, y) 	| sqrt(x^2 +y^2) without intermediate overflow or underflow  | double
+| log(x) 		| natural logarithm (base E) of x 							 | double
+| log10(x) 		| base 10 logarithm of x 									 | double
+| max(x, y) 	| number with the highest value 							 | double/float/int/long
+| min(x, y) 	| number with the lowest value 								 | double/float/int/long
+| 				| 															 |
+| random() 		| random number between 0 and 1 							 | double
+| sin(x) 		| sine of x (x is in radians) 								 | double
+| sinh(x) 		| hyperbolic sine of a double value 						 | double
+| cos(x) 		| cosine of x (x is in radians) 							 | double
+| cosh(x) 		| hyperbolic cosine of a double value 						 | double
+| tan(x) 		| tangent of an angle 										 | double
+| tanh(x) 		| hyperbolic tangent of a double value 						 | double
+| toDegrees(x) 	| radians to an approx. equivalent angle measured in degrees | double
+| toRadians(x) 	| degrees to an approx. angle measured in radians 			 | double
