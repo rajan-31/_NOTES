@@ -60,6 +60,7 @@ It means created by the programmer and is not defined by Java (except for String
 
 
 - Widening Casting (automatically) - converting a smaller type to a larger type size
+
 	byte -> short -> char -> int -> long -> float -> double
 
 	```java
@@ -68,6 +69,7 @@ It means created by the programmer and is not defined by Java (except for String
 	```
 
 - Narrowing Casting (manually) - converting a larger type to a smaller size type
+
 	double -> float -> long -> int -> char -> short -> byte
 	```java
 	double myDouble = 9.78d;
