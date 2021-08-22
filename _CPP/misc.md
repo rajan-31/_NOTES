@@ -1,0 +1,2 @@
+- [Heap memory and stack memory](https://www.geeksforgeeks.org/stack-vs-heap-memory-allocation/)
+- 
