@@ -1,9 +1,6 @@
-### Libs
+## Libs
 
 ```cpp
-#include <bits/stdc++.h>
-/* includes every standard library */
-
 #include <algorithm>
 /*
 sort(beginItr, endItr)
@@ -15,10 +12,19 @@ swap(ds1, ds2)    // eg. vector1, vector2
 */
 
 #include <vector>
-/* array, map, unordered_map, etc. */
+/* similarly array, map, unordered_map, etc. */
+
+#include <cmath>
+/*  */
+
+#include <bits/stdc++.h>
+/* 
+- header file that includes every standard library
+- compilation with other than GCC compiler might fail - eg. MSVC
+*/
 ```
 
-### Other
+## Other
 
 ```cpp
 // type
@@ -35,7 +41,9 @@ ds.assign({ comma sep elements});
 ds.assign(number_of_elements, value);    // elements with specific value
 ```
 
-### Array
+---
+
+## Array
 
 - passing array name w/o index to a function passes ptr by default
 
@@ -65,7 +73,7 @@ array<int, n> arr = {};    // default val 0
 // arr.empty();
 ```
 
-### String
+## String
 
 **C style character string**
 
@@ -109,7 +117,7 @@ str.find(value);    // index else string::npos
 str.find(value, start_pos);    // index else string::npos
 ```
 
-### Vector
+## Vector
 
 - dynamic size
 
@@ -142,9 +150,9 @@ for(auto itr = vec.rbegin(); itr! = vec.rend(); itr++)
     cout<<*itr<<" ";
 ```
 
-### Set
+## Set
 
-- element are sorted in asc order
+- elements are sorted in asc order
 
 ```cpp
 set<int>myset = {1, 2, 3};
@@ -164,7 +172,7 @@ myset.clear();
 
 - faster
 
-### Map
+## Map
 
 - ordered keys
 
@@ -197,7 +205,7 @@ for(auto itr = m.rbegin(); itr!=m.rend(); ++itr)
 - faster
 - no reverse iteration (no reverse trversal)
 
-### Dequeue
+## Dequeue
 
 ```cpp
 deque<int> dq = {1,2,3};
@@ -214,7 +222,7 @@ dq.front();
 dq.back();
 ```
 
-### Stack
+## Stack
 
 ```cpp
 stack<int> stk;
@@ -229,7 +237,7 @@ stk.empty();
 
 ---
 
-### Multiset
+## Multiset
 
 - stores elements in sorted order
 - store dups
@@ -249,10 +257,11 @@ ms.count(value);
 ms.find(value);    // itr
 ```
 
-### Multimap
+## Multimap
 
 - stores keys in sorted order
 - store dup keys
+- map-like insertion not possible
 
 ```cpp
 multimap<int, string> mm;
@@ -270,7 +279,7 @@ ms.find(key);    // itr
 
 ---
 
-### Forward list | Singly linked list
+## Forward list | Singly linked list
 
 ```cpp
 forward_list<int> ll;
@@ -289,7 +298,7 @@ ll.front();
 // ll.before_begin();    // itr - head
 ```
 
-### List | Doubly linked list
+## List | Doubly linked list
 
 ```cpp
 list<int> dll;
@@ -308,4 +317,87 @@ dll.back();
 
 dll.reverse();
 dll.sort();
+```
+
+---
+
+## Math
+
+```cpp
+#include <cmath>
+```
+
+| Method 		| Description 												 | Return Type
+|---			|---														 |---
+| fmax(x, y) 	| number with the highest value 							 | double/float/long double
+| fmin(x, y) 	| number with the lowest value 								 | -//-
+| `             |                                                            |
+| abs(x)  		| and fabs(x), absolute value of x 							 | -//-
+| pow(x, y) 	| value of x to the power of y 								 | -//-
+| sqrt(x) 		| square root of x 											 | -//-
+| cbrt(x) 		| cube root of x 											 | -//-
+| hypot(x, y) 	| sqrt(x^2 +y^2) without intermediate overflow or underflow  | -//-
+| `             |                                                            |
+| floor(x) 		| value of x rounded down to its nearest integer 			 | -//-
+| ceil(x) 		| value of x rounded up to its nearest integer 				 | -//-
+| round(x) 		| value of x rounded to its nearest integer 				 | -//-
+| trunc(x)      | removes digits after decimal point                         | -//-
+| log(x) 		| natural logarithm (base E) of x 							 | -//-
+| log10(x) 		| base 10 logarithm of x 									 | -//-
+| `				| 															 |
+| sin(x) 		| sine of x (x is in radians) 								 | -//-
+| sinh(x) 		| hyperbolic sine of a value     					    	 | -//-
+| cos(x) 		| cosine of x (x is in radians) 							 | -//-
+| cosh(x) 		| hyperbolic cosine of a value 			        			 | -//-
+| tan(x) 		| tangent of an angle 										 | -//-
+| tanh(x) 		| hyperbolic tangent of a value 			    			 | -//-
+
+**Other concepts**
+
+```cpp
+#include <limits>
+/* 
+int - INT_MIN, INT_MAX, UINT_MAX, 
+long long - LLONG_MIN, LLONG_MAX, ULLONG_MAX
+*/
+```
+
+| Data Type 	| Size(bytes)| Range of Values
+| ---		    | :---:		 | ---
+| bool          | 1          | 0 or 1
+| char 	        | 1  	     | -128 to 127
+| unsigned char | 1          | 0 to 255
+| short         | 2  	     | -32768 to 32767
+| `             |            |
+| int 	        | 4  	     | -2147483648 to 2147483647
+| long 	        | 4  	     | -2147483648 to 2147483647
+| long long     | 8  	     | -$2^{63}$ to $2^{63}$ -1
+| float 	    | 4  	     | $3.4^{-38}$ to $3.4^{+38}$
+| double 	    | 8  	     | $1.7^{-308}$ to $1.7^{+308}$
+| long double 	|            | 
+
+> **Data type modifiers available in C++ are:**
+>
+> - Signed
+> - Unsigned
+> - Short
+> - Long
+> 
+> **Note:**\
+> int = signed int = long = long int\
+> long long = long long int
+
+---
+
+## Structures
+
+- Structure is a collection of variables of different data types under a single name
+
+```cpp
+struct Person {
+    // something
+};
+
+// structure var and ptr
+Person john, *ptr
 ```
