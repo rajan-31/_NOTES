@@ -275,7 +275,7 @@ mm.size();
 mm.empty();
 
 mm.count(key);
-ms.find(key);    // itr
+mmt.find(key);    // itr
 ```
 
 ---
