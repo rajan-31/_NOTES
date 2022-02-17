@@ -3,3 +3,4 @@
 *.class
 *.out
 sync.cmd
+sync.sh
