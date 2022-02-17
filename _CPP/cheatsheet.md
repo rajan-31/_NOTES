@@ -136,6 +136,7 @@ vec.empty();    // bool
 vec.erase(vec.begin() + pos);
 vec.erase(vec.begin() + from, vec.begin() + till);
 vec.clear();
+vec.resize(size, val);  // val: optional
 
 // treversing
 for(auto elt: vec)
