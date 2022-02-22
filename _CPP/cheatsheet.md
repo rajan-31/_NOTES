@@ -1,14 +1,18 @@
+*abbreviations:* ds -> Data Structure, ptr -> pointer.
+
+
 ## Libs
 
 ```cpp
 #include <algorithm>
 /*
-sort(beginItr, endItr)
-lower_bound(beginItr, endItr, value)    // itr of equal or just greater value
-upper_bound(beginItr, endItr, value)    // itr of just greater value or itr end
-fill(beginItr, endItr, value)
+sort(beginItr, endItr);
+lower_bound(beginItr, endItr, value);    // itr of equal or just greater value
+upper_bound(beginItr, endItr, value);    // itr of just greater value or itr end
+fill(beginItr, endItr, value);
+reverse(beginItr, endItr);  // in-place
 
-swap(ds1, ds2)    // eg. vector1, vector2
+swap(item1, item2)    // item: array elt, whole array, vector. eg. swap(arr[0], arr[1]); swap(arr1, arr2);
 */
 
 #include <vector>
@@ -58,6 +62,13 @@ int n = sizeof(arr)/sizeof(arr[0]);    // works even w/o array initialization
 
 // sort - algorithms
 sort(arr, arr+n);
+
+// pointer to the underlying array serving as element storage
+int* arr = vec.data();   // modifying it will also modify vector data, access like array, arr[i]
+
+// copy vector data to array
+int arr[vec.size()];
+copy(vec.begin(), vec.end(),arr);
 
 // 2D array, similarly for 3D
 int arr2d[m][n];
@@ -149,6 +160,8 @@ for(auto itr = vec.begin(); itr! = vec.end(); itr++)
 // itr - reverse_iterator
 for(auto itr = vec.rbegin(); itr! = vec.rend(); itr++)
     cout<<*itr<<" ";
+
+vector<char> vec(str.begin(), str.end());   // string to vec of char
 ```
 
 ## Set
@@ -372,9 +385,9 @@ long long - LLONG_MIN, LLONG_MAX, ULLONG_MAX
 | `             |            |
 | int 	        | 4  	     | -2147483648 to 2147483647
 | long 	        | 4  	     | -2147483648 to 2147483647
-| long long     | 8  	     | -$2^{63}$ to $2^{63}$ -1
-| float 	    | 4  	     | $3.4^{-38}$ to $3.4^{+38}$
-| double 	    | 8  	     | $1.7^{-308}$ to $1.7^{+308}$
+| long long     | 8  	     | -2<sup>63</sup> to 2<sup>63</sup> -1
+| float 	    | 4  	     | 3.4<sup>-38</sup> to 3.4<sup>38</sup>
+| double 	    | 8  	     | 1.7<sup>-308</sup> to 1.7<sup>308</sup>
 | long double 	|            | 
 
 > **Data type modifiers available in C++ are:**
@@ -401,4 +414,16 @@ struct Person {
 
 // structure var and ptr
 Person john, *ptr
+```
+
+## Tuple
+
+- useful for returning multple value from a function (other options are pair, struct, vector, etc.)
+
+```cpp
+// declare and/ assign on same/seperate line
+tuple<int, char, string> tp = make_tuple(10, 'a', "Hello");
+
+cout<<get<0>(tp);  // access
+get<1>(tp) = 'b';  // modify
 ```
