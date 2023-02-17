@@ -5,7 +5,7 @@
 
 ```cpp
 #include <algorithm>
-/*
+
 sort(beginItr, endItr);
 lower_bound(beginItr, endItr, value);    // itr of equal or just greater value
 upper_bound(beginItr, endItr, value);    // itr of just greater value or itr end
@@ -13,7 +13,7 @@ fill(beginItr, endItr, value);
 reverse(beginItr, endItr);  // in-place
 
 swap(item1, item2)    // item: array elt, whole array, vector. eg. swap(arr[0], arr[1]); swap(arr1, arr2);
-*/
+
 
 #include <vector>
 /* similarly array, map, unordered_map, etc. */
@@ -43,6 +43,9 @@ ds.find(value);     // itr
 // assign elements
 ds.assign({ comma sep elements});
 ds.assign(number_of_elements, value);    // elements with specific value
+
+// use definitions from the namespace "std"
+using namespace std;
 ```
 
 ---
