@@ -1,6 +1,6 @@
 For more check [https://cplusplus.com/reference](https://cplusplus.com/reference/)
 
-*abbreviations:* itr -> Iterator, ds -> Data Structure, ptr -> pointer.
+*abbreviations:* itr: Iterator, ds: Data Structure, ptr: Pointer.
 
 
 ## Libs
