@@ -1,4 +1,4 @@
-*abbreviations:* ds -> Data Structure, ptr -> pointer.
+*abbreviations:* itr -> Iterator, ds -> Data Structure, ptr -> pointer.
 
 
 ## Libs
