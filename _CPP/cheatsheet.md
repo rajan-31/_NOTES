@@ -7,8 +7,11 @@
 #include <algorithm>
 
 sort(beginItr, endItr);
+
+// for itr => *itr gives index
 lower_bound(beginItr, endItr, value);    // itr of equal or just greater value
 upper_bound(beginItr, endItr, value);    // itr of just greater value or itr end
+max_element(beginItr, endItr);           // itr of max elt
 fill(beginItr, endItr, value);
 reverse(beginItr, endItr);  // in-place
 
