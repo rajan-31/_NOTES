@@ -8,23 +8,44 @@ For more check [https://cplusplus.com/reference](https://cplusplus.com/reference
 ```cpp
 #include <algorithm>
 
+min(a, b);
+min({a, b, c});
+
 sort(beginItr, endItr);
 
 // for itr => *itr gives index
 lower_bound(beginItr, endItr, value);    // itr of equal or just greater value
 upper_bound(beginItr, endItr, value);    // itr of just greater value or itr end
+
+min_element(beginItr, endItr);           // itr of min elt
 max_element(beginItr, endItr);           // itr of max elt
+auto [minn, maxx] = minmax_element(beginItr, endItr);   // pair of itr of min and max elt
+
 fill(beginItr, endItr, value);
 reverse(beginItr, endItr);  // in-place
 
-swap(item1, item2)    // item: array elt, whole array, vector. eg. swap(arr[0], arr[1]); swap(arr1, arr2);
+swap(item1, item2);    // item: array elt, whole array, vector. eg. swap(arr[0], arr[1]); swap(arr1, arr2);
 
+// They return end itr if no value found or no predicate match
+find(firstItr, lastItr, value);     // returns itr to first occurence
+// predicate is boolean function with input as value
+find_if(firstItr, lastItr, predicate);  // return itr when predicate is true first time
+find_if_not(firstItr, lastItr, predicate);  // return itr when predicate is false first time
+
+// can use constant itr, since no modification of value happens
+binary_search(firstItr, lastItr, value);    // returns true/false
+
+// a,b,c,d,e
+// takes advantage of parallalization ==> (a+b) + (c+d) + e
+int summ = reduce((firstItr, lastItr);    // if elts are float return value will be float
+// does left folding ==> (((((a)+b)+c)+d)+e)
+int summ = accumulate((firstItr, lastItr, init_value);    // return value type depends on "init_value" type
 
 #include <vector>
 /* similarly array, map, unordered_map, etc. */
 
 #include <cmath>
-/*  */
+/* See Math section */
 
 #include <bits/stdc++.h>
 /* 
@@ -51,6 +72,11 @@ ds.assign(number_of_elements, value);    // elements with specific value
 
 // use definitions from the namespace "std"
 using namespace std;
+
+// lambda function
+[](int a, int b) {
+    return a < b;
+};
 ```
 
 ---
@@ -124,16 +150,26 @@ strcat(s1, s2);
 string str = "Hello";
 string str = s1 + s2;
 
-// str.size();    // str.length();
+int n = str.size();    // str.length();
 
 str.insert(pos, value);
+
 str.append(value);
+str.append(string);
+str.append(string, pos, count);
+str.append(count, character);
+
 str.replace(start_pos, len, value);
 
-str.substr(start_pos, end_pos);
+str.substr(start_pos, end_pos+1);
+str.pop_back();     // remove 1 character from back, no return value
 
 str.find(value);    // index else string::npos
 str.find(value, start_pos);    // index else string::npos
+
+str = to_string(123)  // (int)
+
+// can reverse in-place using "reverse"
 ```
 
 ## Vector
@@ -157,6 +193,14 @@ vec.erase(vec.begin() + from, vec.begin() + till);
 vec.clear();
 vec.resize(size, val);  // val: optional
 
+// Slicing a vector
+// v1[i:j] | Note: j+1
+v2 = vector<int> (v1.begin()+i, v1.begin()+j+1);
+
+// v1[i:]
+v2 = vector<int> (v1.begin()+i, v1.end());
+
+
 // treversing
 for(auto elt: vec)
     cout<<elt<<" ";
@@ -170,6 +214,17 @@ for(auto itr = vec.rbegin(); itr! = vec.rend(); itr++)
     cout<<*itr<<" ";
 
 vector<char> vec(str.begin(), str.end());   // string to vec of char
+
+// combine vector A = A + B
+A.reserve(B.size());  // not necessary; not sure if has any benefit
+A.insert(A.end(), B.begin(), B.end());
+
+// combine vector AB = A + B
+AB.reserve(A.size()+B.size());  // not necessary; not sure if has any benefit
+AB.insert(AB.end(), A.begin(), A.end());
+AB.insert(AB.end(), B.begin(), B.end());
+
+//
 ```
 
 ## Set
@@ -203,6 +258,9 @@ map<int, string> mymap;
 
 mymap.insert(pair<int, string>(intVal, strVal));
 mymap[key] = value;
+
+// returns end itr if not found
+map<int, string>::iterator x = mymap.find(key);
 
 mymap.size();
 mymap.empty();
@@ -366,6 +424,7 @@ dll.sort();
 | trunc(x)      | removes digits after decimal point                         | -//-
 | log(x) 		| natural logarithm (base E) of x 							 | -//-
 | log10(x) 		| base 10 logarithm of x 									 | -//-
+| log2(x) 		| base 2 logarithm of x 									 | -//-
 | `				| 															 |
 | sin(x) 		| sine of x (x is in radians) 								 | -//-
 | sinh(x) 		| hyperbolic sine of a value     					    	 | -//-
@@ -373,6 +432,17 @@ dll.sort();
 | cosh(x) 		| hyperbolic cosine of a value 			        			 | -//-
 | tan(x) 		| tangent of an angle 										 | -//-
 | tanh(x) 		| hyperbolic tangent of a value 			    			 | -//-
+
+
+| Operator      | Symbol    | Form      | Operation
+|---            |:-:        |:-:        |---
+| left shift    | <<        | x << y    | all bits in x shifted left y bits
+| right shift   | >>        | x >> y    | all bits in x shifted right y bits
+| NOT           | ~         | ~x        | all bits in x flipped
+| AND           | &         | x & y     | each bit in x AND each bit in y
+| OR            | |         | x | y     | each bit in x OR each bit in y
+| XOR           | ^         | x ^ y     | each bit in x XOR each bit in y
+
 
 **Other concepts**
 
@@ -389,14 +459,14 @@ long long - LLONG_MIN, LLONG_MAX, ULLONG_MAX
 | bool          | 1          | 0 or 1
 | char 	        | 1  	     | -128 to 127
 | unsigned char | 1          | 0 to 255
-| short         | 2  	     | -32768 to 32767
+| short         | 2  	     | -32768 to 32767 `OR` -2<sup>15</sup> to 2<sup>15</sup> -1
 | `             |            |
-| int 	        | 4  	     | -2147483648 to 2147483647
-| long 	        | 4  	     | -2147483648 to 2147483647
+| int 	        | 4  	     | -2147483648 to 2147483647 `OR` -2<sup>31</sup> to 2<sup>31</sup> -1
+| long 	        | 4  	     | -2147483648 to 2147483647 `OR` -2<sup>31</sup> to 2<sup>31</sup> -1
 | long long     | 8  	     | -2<sup>63</sup> to 2<sup>63</sup> -1
-| float 	    | 4  	     | 3.4<sup>-38</sup> to 3.4<sup>38</sup>
-| double 	    | 8  	     | 1.7<sup>-308</sup> to 1.7<sup>308</sup>
-| long double 	|            | 
+| float 	    | 4  	     | ±3.4x10<sup>±38</sup>
+| double 	    | 8  	     | ±1.7x10<sup>±308</sup>
+| long double 	| 12         | ±1.1x10<sup>±4932</sup>
 
 > **Data type modifiers available in C++ are:**
 >
@@ -405,9 +475,38 @@ long long - LLONG_MIN, LLONG_MAX, ULLONG_MAX
 > - Short
 > - Long
 > 
-> **Note:**\
-> int = signed int = long = long int\
-> long long = long long int
+> **Note:**
+> - int == signed int == long == long int\
+>   long long == long long int
+> - ±3.4x10<sup>±38</sup> != -3.4x10<sup>-38</sup> to 3.4x10<sup>38</sup>\
+>   Because, -3.4x10<sup>38</sup> is smaller than -3.4x10<sup>-38</sup>\
+>   So, that's just a bad way to represent the range\
+>   Similar is applicable for double, long double, etc.
+
+
+## Type Conversion
+
+```cpp
+// float to int
+int num1 = (int) float_value;
+
+
+// int to string
+string num2 = to_string(123);    // (int), part of <string>
+
+
+// string to int, l, ll
+// stoi, stol, stoll
+int num2 = stoi("123");     // 123
+int num2 = stoi("-123");    // -123
+int num2 = stoi(" +123");   // 123
+
+// string to int (fasterthan above method)
+// #include <charconv>
+string str = "123";
+int num3;
+from_chars(str.data(), str.data()+str.size(), num3);     // in place
+```
 
 ---
 
@@ -435,3 +534,11 @@ tuple<int, char, string> tp = make_tuple(10, 'a', "Hello");
 cout<<get<0>(tp);  // access
 get<1>(tp) = 'b';  // modify
 ```
+
+## Lambda Functions
+
+Learn
+    - How to define
+    - Lambda captures
+    - mutable keyword
+    - use independently, in method/ function call
