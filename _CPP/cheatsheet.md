@@ -37,9 +37,9 @@ binary_search(firstItr, lastItr, value);    // returns true/false
 
 // a,b,c,d,e
 // takes advantage of parallalization ==> (a+b) + (c+d) + e
-int summ = reduce((firstItr, lastItr);    // if elts are float return value will be float
+int summ = reduce(firstItr, lastItr);    // if elts are float return value will be float
 // does left folding ==> (((((a)+b)+c)+d)+e)
-int summ = accumulate((firstItr, lastItr, init_value);    // return value type depends on "init_value" type
+int summ = accumulate(firstItr, lastItr, init_value);    // return value type depends on "init_value" type
 
 #include <vector>
 /* similarly array, map, unordered_map, etc. */
