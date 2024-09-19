@@ -296,7 +296,7 @@ dq.pop_back();
 dq.pop_front();
 
 // dq.size();
-// dq.empty;
+// dq.empty();
 
 dq.front();
 dq.back();
@@ -440,7 +440,7 @@ dll.sort();
 | right shift   | >>        | x >> y    | all bits in x shifted right y bits
 | NOT           | ~         | ~x        | all bits in x flipped
 | AND           | &         | x & y     | each bit in x AND each bit in y
-| OR            | |         | x | y     | each bit in x OR each bit in y
+| OR            | \|        | x \| y    | each bit in x OR each bit in y
 | XOR           | ^         | x ^ y     | each bit in x XOR each bit in y
 
 
