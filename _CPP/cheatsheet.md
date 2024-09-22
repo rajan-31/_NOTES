@@ -399,6 +399,23 @@ dll.reverse();
 dll.sort();
 ```
 
+## Priority Queue | Heap
+
+```cpp
+priority_queue<int> maxHeap;
+priority_queue<int, vector<int>, greater<int>> minHeap;
+
+maxHeap.push(val);
+maxHeap.top();  // int
+maxHeap.pop();  // void
+maxHeap.empty();    // bool
+maxHeap.size();     // int
+
+// add all elements of a vector
+maxHeap(vec.begin(), vec.end());
+minHeap(vec.begin(), vec.end(), greater<int>());    // note "()" after greater<int>
+```
+
 ---
 
 ## Math
