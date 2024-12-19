@@ -2,5 +2,5 @@
 *.code-workspace
 *.class
 *.out
-sync.cmd
-sync.sh
+# sync.cmd
+# sync.sh
