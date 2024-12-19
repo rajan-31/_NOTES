@@ -428,13 +428,13 @@ minHeap(vec.begin(), vec.end(), greater<int>());    // note "()" after greater<i
 |---			|---														 |---
 | fmax(x, y) 	| number with the highest value 							 | double/float/long double
 | fmin(x, y) 	| number with the lowest value 								 | -//-
-| `             |                                                            |
+| .             |                                                            |
 | abs(x)  		| and fabs(x), absolute value of x 							 | -//-
 | pow(x, y) 	| value of x to the power of y 								 | -//-
 | sqrt(x) 		| square root of x 											 | -//-
 | cbrt(x) 		| cube root of x 											 | -//-
 | hypot(x, y) 	| sqrt(x^2 +y^2) without intermediate overflow or underflow  | -//-
-| `             |                                                            |
+| .             |                                                            |
 | floor(x) 		| value of x rounded down to its nearest integer 			 | -//-
 | ceil(x) 		| value of x rounded up to its nearest integer 				 | -//-
 | round(x) 		| value of x rounded to its nearest integer 				 | -//-
@@ -442,7 +442,7 @@ minHeap(vec.begin(), vec.end(), greater<int>());    // note "()" after greater<i
 | log(x) 		| natural logarithm (base E) of x 							 | -//-
 | log10(x) 		| base 10 logarithm of x 									 | -//-
 | log2(x) 		| base 2 logarithm of x 									 | -//-
-| `				| 															 |
+| .				| 															 |
 | sin(x) 		| sine of x (x is in radians) 								 | -//-
 | sinh(x) 		| hyperbolic sine of a value     					    	 | -//-
 | cos(x) 		| cosine of x (x is in radians) 							 | -//-
@@ -472,12 +472,12 @@ long long - LLONG_MIN, LLONG_MAX, ULLONG_MAX
 ```
 
 | Data Type 	| Size(bytes)| Range of Values
-| ---		    | :---:		 | ---
+|---		    |:---:		 |---
 | bool          | 1          | 0 or 1
 | char 	        | 1  	     | -128 to 127
 | unsigned char | 1          | 0 to 255
 | short         | 2  	     | -32768 to 32767 `OR` -2<sup>15</sup> to 2<sup>15</sup> -1
-| `             |            |
+| .             |            |
 | int 	        | 4  	     | -2147483648 to 2147483647 `OR` -2<sup>31</sup> to 2<sup>31</sup> -1
 | long 	        | 4  	     | -2147483648 to 2147483647 `OR` -2<sup>31</sup> to 2<sup>31</sup> -1
 | long long     | 8  	     | -2<sup>63</sup> to 2<sup>63</sup> -1
