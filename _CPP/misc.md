@@ -1,4 +1,3 @@
-- [Heap memory and stack memory](https://www.geeksforgeeks.org/stack-vs-heap-memory-allocation/)
 - Member Initialization Lists:
 
 	Used in constructors to initialize class members directly.

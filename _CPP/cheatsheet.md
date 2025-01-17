@@ -23,6 +23,7 @@ auto [minn, maxx] = minmax_element(beginItr, endItr);   // pair of itr of min an
 
 fill(beginItr, endItr, value);
 reverse(beginItr, endItr);  // in-place
+// reverse(A.begin(). A.end()) == reverse(A.begin(), A.begin()+n)   // not n-1
 
 swap(item1, item2);    // item: array elt, whole array, vector. eg. swap(arr[0], arr[1]); swap(arr1, arr2);
 
@@ -34,6 +35,9 @@ find_if_not(firstItr, lastItr, predicate);  // return itr when predicate is fals
 
 // can use constant itr, since no modification of value happens
 binary_search(firstItr, lastItr, value);    // returns true/false
+
+// find next permutation
+next_permutation(vec.begin(), vect.end());  // modifies orginial vec, can use (arr, arr+n)
 
 // a,b,c,d,e
 // takes advantage of parallalization ==> (a+b) + (c+d) + e
