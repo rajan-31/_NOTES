@@ -36,8 +36,10 @@ find_if_not(firstItr, lastItr, predicate);  // return itr when predicate is fals
 // can use constant itr, since no modification of value happens
 binary_search(firstItr, lastItr, value);    // returns true/false
 
-// find next permutation
+// find next permutation of vector, string
 next_permutation(vec.begin(), vect.end());  // modifies orginial vec, can use (arr, arr+n)
+// to get all permutations ==> sort it first
+// while(next_permutation(vec.begin(), vect.end())) {// it will modify original data}
 
 // a,b,c,d,e
 // takes advantage of parallalization ==> (a+b) + (c+d) + e
