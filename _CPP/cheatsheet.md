@@ -53,6 +53,12 @@ int summ = accumulate(firstItr, lastItr, init_value);    // return value type de
 // partially sort to put "ith" element (0-based index) at correct position, inplace
 nth_element(vec.begin(), vec.begin()+i, vec.end());     // O(vec.size())
 
+// itr of last element
+// vec.end() is not itr of last elt
+vec.rbegin();
+vec.end() - 1;      // not safe if vec is empty
+prev(vec.end());    // not safe if vec is empty
+
 
 #include <vector>
 /* similarly array, map, unordered_map, etc. */
@@ -406,6 +412,7 @@ ll.remove(value);   // all occurences
 ll.erase_after(fromItr, toItr);
 
 ll.front();
+ll.empty();
 
 // ll.before_begin();    // itr - head
 ```
@@ -427,6 +434,7 @@ dll.erase(posItr);    // or (fromItr, toItr)
 dll.front();
 dll.back();
 
+dll.size();
 dll.reverse();
 dll.sort();
 ```
@@ -610,7 +618,7 @@ int num2 = stoi("123");     // 123
 int num2 = stoi("-123");    // -123
 int num2 = stoi(" +123");   // 123
 
-// string to int (fasterthan above method)
+// string to int (faster than above method)
 // #include <charconv>
 string str = "123";
 int num3;
@@ -640,8 +648,10 @@ Person john, *ptr
 // declare and/ assign on same/seperate line
 tuple<int, char, string> tp = make_tuple(10, 'a', "Hello");
 
-cout<<get<0>(tp);  // access
+cout<<get<0>(tp);  // access    // index need to be compile time contant
 get<1>(tp) = 'b';  // modify
+
+auto [num, ch, str] = tp;   // c++17
 ```
 
 ## Lambda Functions
@@ -651,3 +661,27 @@ Learn
     - Lambda captures
     - mutable keyword
     - use independently, in method/ function call
+
+```cpp
+// can simly use "auto"
+function<bool(int, int&)> cmp = [](int a, int &b) {
+    return a < b;
+};
+cmp(2, 3);   // true
+
+
+// Capture
+// - capture value is by default const (though if it's capture ref, you can use that pointer to modify outside value but can't modify pointer itself)
+int x = 10;
+auto f1 = [x](int y) { return x + 1; };     // capture by value (copy) // if later x is changed outside, still it will use old x
+auto f2 = [&x](int y) { return x + 1; };    // capture by ref
+
+
+// mutable: if you want to modify capture value, and don't want to affect original/outside value
+// so next you call this lambda, it will see modified value (remember, outside x is not modified), lambda's copy of x is modified
+function<int()> f3 = [x]() mutable {
+    x++;
+    return x;
+};
+
+```
