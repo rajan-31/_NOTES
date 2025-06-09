@@ -44,8 +44,15 @@ next_permutation(vec.begin(), vect.end());  // modifies orginial vec, can use (a
 // a,b,c,d,e
 // takes advantage of parallalization ==> (a+b) + (c+d) + e
 int summ = reduce(firstItr, lastItr);    // if elts are float return value will be float
+// reduce(firstItr, lastItr, initValue, lambdaFunc);    // lambdaFunc(prevResult, item)
+
 // does left folding ==> (((((a)+b)+c)+d)+e)
 int summ = accumulate(firstItr, lastItr, init_value);    // return value type depends on "init_value" type
+// accumulate(firstItr, lastItr, init_value, lambdaFunc);    // lambdaFunc(prevResult, item)
+
+// partially sort to put "ith" element (0-based index) at correct position, inplace
+nth_element(vec.begin(), vec.begin()+i, vec.end());     // O(vec.size())
+
 
 #include <vector>
 /* similarly array, map, unordered_map, etc. */
@@ -165,9 +172,9 @@ str.append(string);
 str.append(string, pos, count);
 str.append(count, character);
 
-str.replace(start_pos, len, value);
+str.replace(start_pos, n, value);     // from start_pos to start_pos+n-1 replace with value (if its size is smaller than n, overall string size will reduce)
 
-str.substr(start_pos, end_pos+1);
+str.substr(start_pos, len);     // OR str.substr(start_pos, end_pos - start_pos + 1);
 str.pop_back();     // remove 1 character from back, no return value
 
 str.find(value);    // index else string::npos
@@ -274,6 +281,9 @@ mymap.empty();
 mymap.erase(key);    // or itr
 mymap.erase(startItr, endItr);
 
+mymap.find(key)     // itr or mymap.end(), key=*itr.first, value=*itr.second
+mymap.count(key)    // if key present => 1, else => 0   // better way to check key presence than find
+
 // traversing
 for(auto itr: m)
     cout<<itr.first<<" "<<itr.second<<"\n";
@@ -290,6 +300,34 @@ for(auto itr = m.rbegin(); itr!=m.rend(); ++itr)
 
 - faster
 - no reverse iteration (no reverse trversal)
+
+## Stack
+
+```cpp
+stack<int> stk;
+
+stk.push(value);
+stk.pop();    // doesn't return value   // may throw error if stack is empty
+stk.top();                              // may throw error if stack is empty
+
+stk.size();
+stk.empty();
+```
+
+## Queue
+
+```cpp
+queue<int> q;
+
+q.push(value);     // Add to back
+q.pop();           // Remove from front
+
+q.front();         // Access front
+q.back();          // Access back
+
+q.size();          // Number of elements
+q.empty();         // Check if empty
+```
 
 ## Dequeue
 
@@ -308,19 +346,6 @@ dq.front();
 dq.back();
 ```
 
-## Stack
-
-```cpp
-stack<int> stk;
-
-stk.push(value);
-stk.pop();    // doesn't return value
-stk.top();
-
-stk.size();
-stk.empty();
-```
-
 ---
 
 ## Multiset
@@ -333,6 +358,7 @@ stk.empty();
 multiset<int> ms = {1,2,3,3}
 
 ms.insert(value);
+// removes one occurence not all
 ms.erase(value);
 ms.erase(posItr);    // ms.erase(fromItr, toItr);
 
@@ -374,8 +400,8 @@ ll.insert_after(itr, value);    // or (itr, count, value)
 
 ll.push_front(value);
 
-ll.pop_front();
-ll.remove(value);    // all occurences
+ll.pop_front();     // no return
+ll.remove(value);   // all occurences
 
 ll.erase_after(fromItr, toItr);
 
@@ -409,7 +435,7 @@ dll.sort();
 
 ```cpp
 priority_queue<int> maxHeap;
-priority_queue<int, vector<int>, greater<int>> minHeap;
+priority_queue<int, vector<int>, greater<int>> minHeap; // data type, underlying container,
 
 maxHeap.push(val);
 maxHeap.top();  // int
@@ -420,6 +446,66 @@ maxHeap.size();     // int
 // add all elements of a vector
 maxHeap(vec.begin(), vec.end());
 minHeap(vec.begin(), vec.end(), greater<int>());    // note "()" after greater<int>
+```
+
+## Bitset
+
+```cpp
+// N must be a compile-time constant (fixed size)
+const int N = 8; // Example size
+
+// Declaration and Initialization
+bitset<N> b1;             // All N bits initialized to 0. Example: 00000000
+bitset<N> b2(10);         // From unsigned long long integer. Example (N=8): 00001010 (binary for 10)
+bitset<N> b3(string("1101")); // From std::string (right-aligned, padded with 0s). Example (N=8): 00001101
+// Can also initialize from C-style string, or substring of std::string
+
+// Accessing Bits
+bool bit_val = b3.test(0); // Read bit at position 0 (rightmost). Returns bool. Bounds checked (throws std::out_of_range if pos >= N). Output: 1
+bool bit_val_op = b3[0];   // Read bit using operator[]. Returns bool-like proxy. No bounds checking usually. Output: 1
+// b3[1] = 0;             // Modify bit using operator[]. Example: b3 becomes 00001100
+
+// Modification
+b1.set();                // Set all bits to 1. Example: 11111111
+b1.set(2);               // Set bit at position 3 to 1. Example: 11111011 -> 11111111
+b1.set(2, false);        // Set bit at position 2 to 0. Example: 11111111 -> 11111011
+
+b1.reset();              // Reset all bits to 0. Example: 11111011 -> 00000000
+b1.reset(3);             // Reset bit at position 3 to 0. Example: 00001000 -> 00000000 (if b1 was 00001000)
+
+b1.flip();               // Flip all bits (~ operator). Example: 00000000 -> 11111111
+b1.flip(0);              // Flip bit at position 0. Example: 11111111 -> 11111110
+
+// Querying
+size_t num_bits = b1.size(); // Returns N (compile-time size). Output: 8
+size_t set_bits = b1.count(); // Returns the number of set bits (1s).
+bool any_set = b1.any();   // Returns true if at least one bit is set.
+bool none_set = b1.none();  // Returns true if none of the bits are set.
+bool all_set = b1.all();   // Returns true if all bits are set.
+
+// Bitwise Operators (Member and Non-Member)
+b1 &= b2; // Bitwise AND assignment
+b1 |= b2; // Bitwise OR assignment
+b1 ^= b2; // Bitwise XOR assignment
+
+b1 <<= 2; // Left shift assignment
+b1 >>= 1; // Right shift assignment
+
+bitset<N> b4 = ~b1;     // Bitwise NOT
+bitset<N> b5 = b1 & b2; // Bitwise AND
+bitset<N> b6 = b1 | b2; // Bitwise OR
+bitset<N> b7 = b1 ^ b2; // Bitwise XOR
+bitset<N> b8 = b1 << 3; // Left shift
+bitset<N> b9 = b1 >> 2; // Right shift
+
+// Comparison
+bool are_equal = (b1 == b2);
+bool are_noteq = (b1 != b2);
+
+// Conversion
+string s = b1.to_string(); // Convert to binary string. Example: "11111110"
+unsigned long ul = b1.to_ulong();       // Convert to unsigned long. Throws std::overflow_error if value doesn't fit.
+unsigned long long ull = b1.to_ullong(); // Convert to unsigned long long. Throws std::overflow_error if value doesn't fit.
 ```
 
 ---
