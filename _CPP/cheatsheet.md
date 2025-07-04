@@ -100,6 +100,28 @@ using namespace std;
 
 ---
 
+## Pair
+
+- Holds two elements of possibly different types
+
+```cpp
+pair<int, string> p{1, "one"};  // declaration and initialization
+
+// accessing elements
+cout << p.first << " " << p.second << endl;
+
+// unpacking (C++11)
+int num;
+string str;
+tie(num, str) = p;  // num = 1, str = "one"
+// OR
+auto [num, str] = p;
+
+pair<num, string>{1, "one"} == p    // valid comparison, won't work with only curly braces
+```
+
+- **IMPORTANT: Destructuring only works on one level. Same thing is applicable for `tuple` also.**
+
 ## Array
 
 - passing array name w/o index to a function passes ptr by default
@@ -249,6 +271,8 @@ AB.insert(AB.end(), B.begin(), B.end());
 ## Set
 
 - elements are sorted in asc order
+- you can have set with any structure, without specifying custom hash function
+    - to achieve same with unordered_set, you need to give custom hash funtion
 
 ```cpp
 set<int>myset = {1, 2, 3};
@@ -260,8 +284,19 @@ myset.empty();
 
 myset.find(value);     // pos itr else myset.end()
 myset.count(value);    // 1 if present else 0
-myset.erase(value);    // or myset.begin()+pos
+myset.erase(value);    // or myset.begin()+pos  // returns number of deleted elements, size_t, 0 if value not present
 myset.clear();
+
+set<vector<pair<int,int>>> uniqueIslands;   // valid, will need custom hash function with unordered_set
+
+struct PairHash {
+    size_t operator()(const pair<int, int> &p) const {
+        return hash<int>()(p.first) ^ (hash<int>()(p.second) << 1);
+        // OR something simple
+        // return 31 * p.first + 37 * p.second; // 31, 37 are prime
+    }
+};
+unordered_set<pair<int, int>, PairHash> myset;
 ```
 
 **Unordered Set**
@@ -318,6 +353,10 @@ stk.top();                              // may throw error if stack is empty
 
 stk.size();
 stk.empty();
+
+/* NOTE:
+ * - stack don't have iterator
+*/
 ```
 
 ## Queue
@@ -333,6 +372,10 @@ q.back();          // Access back
 
 q.size();          // Number of elements
 q.empty();         // Check if empty
+
+/* NOTE:
+ * - queue don't have iterator
+*/
 ```
 
 ## Dequeue
@@ -633,11 +676,35 @@ from_chars(str.data(), str.data()+str.size(), num3);     // in place
 
 ```cpp
 struct Person {
-    // something
+    string name;
+    int age;
 };
 
-// structure var and ptr
-Person john, *ptr
+// structure varriable and ptr
+Person p1, *ptr
+
+ptr = &p1;
+
+p1.name = "John";
+ptr->age = 25;
+
+// ---
+
+struct Person {
+    string name;
+    int age;
+
+    // Constructor
+    Person(string name, int age) : name(name), age(age) {}
+};
+
+Person p2("Roman", 23);
+p2.age = 22;
+
+// Dynamic (heap mem, not stack mem) allocation ==> need to cleanup
+Person *ptr2 = new Person;  // OR Person *ptr2 = new Person{"AJ", 23};
+
+delete ptr2;
 ```
 
 ## Tuple

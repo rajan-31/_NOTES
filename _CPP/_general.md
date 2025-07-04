@@ -47,3 +47,13 @@
         [](int x) { return x % 2 == 0; }
     );
     ```
+
+- `size_t` used for unsigned integers that represent sizes and indices
+    - generally used for container sizes (eg. vector.size(), etc.)
+    - its size depends on platform
+        - It matches the platform's address space
+        - 32-bit platform => 32-bit (4 byte)
+        - 64-bit platform => 64-bit (8 byte)
+    - unlike double, long long, unsigned long long have same size and range
+    - It's guaranteed to be large enough to index any array
+    - It's essentially tied to the platform's pointer size
