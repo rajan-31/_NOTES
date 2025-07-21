@@ -19,6 +19,7 @@ upper_bound(beginItr, endItr, value);    // itr of just greater value or itr end
 
 min_element(beginItr, endItr);           // itr of min elt
 max_element(beginItr, endItr);           // itr of max elt
+max({a, b, c});     // returns max value
 auto [minn, maxx] = minmax_element(beginItr, endItr);   // pair of itr of min and max elt
 
 fill(beginItr, endItr, value);
@@ -153,7 +154,7 @@ int arr2d[m][n] = { {0, 1, 2, 3},  {4, 5, 6, 7}, {8, 9, 10, 11} };
 **Array class**
 
 ```cpp
-array<int, n> arr = {};    // default val 0
+array<int, n> arr = {};    // default val 0, n: compile time constant
 
 // arr.size();
 // arr.empty();
@@ -203,6 +204,8 @@ str.append(count, character);
 str.replace(start_pos, n, value);     // from start_pos to start_pos+n-1 replace with value (if its size is smaller than n, overall string size will reduce)
 
 str.substr(start_pos, len);     // OR str.substr(start_pos, end_pos - start_pos + 1);
+str.substr(start_pos);  // will take till end
+
 str.pop_back();     // remove 1 character from back, no return value
 
 str.find(value);    // index else string::npos
@@ -211,7 +214,62 @@ str.find(value, start_pos);    // index else string::npos
 str = to_string(123)  // (int)
 
 // can reverse in-place using "reverse"
+
+// c string to string class string
+char str[] = "Hello";
+string cpp_str = str;  // OR string cpp_str(str);
+// OR string cpp_str; cpp_str.assign(str);
 ```
+
+- Splitting a string by delimiter
+    - delimiter length is one (char)
+    ```cpp
+    vector<string> split(string& str, char delimiter) {
+        vector<string> tokens;
+        stringstream ss(str);
+        string token;
+
+        while (getline(ss, token, delimiter)) {
+            tokens.push_back(token);
+        }
+
+        return tokens;
+    }
+    ```
+    - delimiter length is one or more (string)
+    ```cpp
+    // Method 1: with search() (iterator-based)
+    vector<string> split(string &str, string &delimiter) {
+        vector<string> tokens;
+        auto start = str.begin();
+
+        while (start != str.end()) {
+            auto end = search(start, str.end(), delimiter.begin(), delimiter.end());
+            tokens.emplace_back(start, end);    // OR tokens.push_back(string(start, end));
+
+            if (end == str.end()) break;
+            start = end + delimiter.size();
+        }
+
+        return tokens;
+    }
+
+    // Method 2: with str.find() (position-based)
+    vector<string> split(string &str, string &delimiter) {
+        vector<string> tokens;
+        size_t start = 0;
+        size_t end = str.find(delimiter, start);
+
+        while (end != string::npos) {
+            tokens.push_back(str.substr(start, end - start));   // not +1 since end is at start of next delimitor
+            start = end + delimiter.length();
+            end = str.find(delimiter, start);
+        }
+
+        tokens.push_back(str.substr(start)); // last token
+        return tokens;
+    }
+    ```
 
 ## Vector
 
@@ -363,6 +421,8 @@ stk.empty();
 
 ```cpp
 queue<int> q;
+// can't initialize with default value and size, can be done like this
+queue<int> q(deque<int>(n, 0));
 
 q.push(value);     // Add to back
 q.pop();           // Remove from front

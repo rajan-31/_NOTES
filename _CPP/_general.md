@@ -57,3 +57,7 @@
     - unlike double, long long, unsigned long long have same size and range
     - It's guaranteed to be large enough to index any array
     - It's essentially tied to the platform's pointer size
+
+- `return memo[i][target] = (take + skip)%MOD;`
+    - The value assigned to `memo` is returned.
+    - In C++, the assignment operator (`=`) is an expression that evaluates to the value being assigned. So, the result of `(take + skip)%MOD` is first assigned to `memo[i][target]`, and then that same value is returned by the function.
