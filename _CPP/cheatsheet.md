@@ -60,6 +60,7 @@ vec.rbegin();
 vec.end() - 1;      // not safe if vec is empty
 prev(vec.end());    // not safe if vec is empty
 
+count(vec.begin(), vec.end(), val); // count frequency
 
 #include <vector>
 /* similarly array, map, unordered_map, etc. */
@@ -224,6 +225,7 @@ string cpp_str = str;  // OR string cpp_str(str);
 - Splitting a string by delimiter
     - delimiter length is one (char)
     ```cpp
+    // [PREFERRED]
     vector<string> split(string& str, char delimiter) {
         vector<string> tokens;
         stringstream ss(str);
@@ -254,6 +256,7 @@ string cpp_str = str;  // OR string cpp_str(str);
         return tokens;
     }
 
+    // [PREFERRED], optimized for strings, unlike "search" which is generic
     // Method 2: with str.find() (position-based)
     vector<string> split(string &str, string &delimiter) {
         vector<string> tokens;
@@ -268,6 +271,18 @@ string cpp_str = str;  // OR string cpp_str(str);
 
         tokens.push_back(str.substr(start)); // last token
         return tokens;
+    }
+    ```
+    - with regex, slow, prefer when delimiter is  pattern instead of fixed string (eg. you need any of ",", ";",...)
+    ```cpp
+    // can use simple string as delimieter
+    // use "\\s+", for 1 or more spaces
+    // Multiple delimiters: "[,;\\s]+"
+    vector<string> split(string &str, string &delimiter) {
+        regex delim(delimiter);
+        sregex_token_iterator iter(str.begin(), str.end(), delim, -1);
+        sregex_token_iterator end;
+        return vector<string>(iter, end);
     }
     ```
 
@@ -286,6 +301,7 @@ vec.insert(vec.begin() + pos, value);
 
 vec.size();     // int
 vec.empty();    // bool
+vec.front(); vec.back();    // will throw error if vec is empty
 
 vec.erase(vec.begin() + pos);
 vec.erase(vec.begin() + from, vec.begin() + till);
@@ -783,12 +799,6 @@ auto [num, ch, str] = tp;   // c++17
 
 ## Lambda Functions
 
-Learn
-    - How to define
-    - Lambda captures
-    - mutable keyword
-    - use independently, in method/ function call
-
 ```cpp
 // can simly use "auto"
 function<bool(int, int&)> cmp = [](int a, int &b) {
@@ -811,4 +821,35 @@ function<int()> f3 = [x]() mutable {
     return x;
 };
 
+```
+
+## Regex
+- regex is slow
+- Heavy loops or large inputs: regex adds overhead
+
+```cpp
+#include <regex>
+
+// 1. regex_match(s, r) // 👉 Checks full string match
+string s1 = "abc123"; regex r1("[a-z]+\\d+"); // r1 is like a variable
+if (regex_match(s1, r1)) cout << "Full match\n";  // ✅ Printed
+
+
+// 2. regex_search(s, r) // 👉 Checks partial match anywhere
+string s2 = "id: abc123, ok"; regex r2("[a-z]+\\d+");
+if (regex_search(s2, r2)) cout << "Partial match\n";  // ✅ Printed
+
+
+// 3. sregex_iterator // 👉 Loop through all matches
+string s3 = "num: 12, 45, 78"; regex r3("\\d+");
+sregex_iterator it(s3.begin(), s3.end(), r3), end;
+for (; it != end; ++it)
+    cout << it->str() << " ";  // 12 45 78
+
+
+// 4. sregex_token_iterator // 👉 Split string using regex
+string s4 = "a, b; c"; regex r4("[,;\\s4]+");
+sregex_token_iterator it(s4.begin(), s4.end(), r4, -1), end;
+for (; it != end; ++it)
+    cout << *it << "\n";  // a \n b \n c
 ```
